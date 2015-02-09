@@ -34,7 +34,7 @@ if [ ${curl_exists} != 0 ]; then
     exit 0
 fi
 
-VER=3.7.4
+VER=3.7.3
 orig_dir=`pwd`
 install_dir=$1
 
@@ -65,8 +65,24 @@ ${install_dir}/bin/conda install conda==3.7.4 -q --yes 1>> ${install_dir}/tmp/in
 
 ${install_dir}/bin/conda install pip==1.5.6 -q --yes 1>> ${install_dir}/tmp/install.log
 
-echo -n "Installing BrainSuite statistical toolbox...This may take a few minutes..."
-${install_dir}/bin/conda install --yes -c https://conda.binstar.org/shjoshi bss==0.1
+echo -n "Installing statsmodels...This may take a few minutes..."
+${install_dir}/bin/conda install statsmodels==0.6.0 -q --yes 1>> ${install_dir}/tmp/install.log
+echo "Done."
+
+echo -n "Installing shapeio..."
+${install_dir}/bin/pip install https://github.com/bmapdev/shapeio/archive/master.zip
+echo "Done."
+
+echo -n "Installing vtk...This may take a few minutes..."
+${install_dir}/bin/conda install vtk==5.10.1 -q --yes 1>> ${install_dir}/tmp/install.log
+echo "Done."
+
+echo -n "Installing nibabel..."
+${install_dir}/bin/pip install nibabel==2.0.0>> ${install_dir}/tmp/install.log
+echo "Done."
+
+echo -n "Installing surftools..."
+${install_dir}/bin/pip install https://github.com/bmapdev/surftools/archive/master.zip
 echo "Done."
 
 if [[ "$platform" == "Linux" ]]; then
